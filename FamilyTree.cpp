@@ -10,7 +10,7 @@ return this;
 family::Tree::Tree addMother(std::string child, std::string mother){
 
 }
-family::Tree::(std::string) relation(std::string name){
+std::string relation(std::string name){
 return "ans";
 }
 std::string find(std::string name){
