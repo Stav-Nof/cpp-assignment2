@@ -1,23 +1,35 @@
 #pragma once
 
 #include <iostream>
-#include "person.hpp"
+using namespace std;
 
 
+class family{
+    public:
+    class person{
+    private:
+    string _name;
+    string _type;
+    person* _father;
+    person* _mother;
+    public:
+    person(string name, string type);
+    void addParent(string name, string type);
+    string get_type();
+    ~person();
+    };
 
-namespace family{
-
-class Tree{
-private:
-    const person* head;
-public:
-    Tree(std::string name);
-    Tree addFather(std::string child, std::string father);
-    Tree addMother(std::string child, std::string mother);
-    std::string relation(std::string name);
-    std::string find(std::string name);
-    void display();
-    void remove(std::string name);
-    ~Tree();
+    class Tree{
+        private:
+        const person* head;
+        public:
+        Tree(string name);
+        Tree addFather(string child, string father);
+        Tree addMother(string child, string mother);
+        string relation(string name);
+        string find(string name);
+        void display();
+        void remove(string name);
+        ~Tree();
+    };
 };
-}
