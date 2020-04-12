@@ -109,3 +109,64 @@ TEST_CASE("Test case 2") {
     CHECK_THROWS_AS(relation("Or"), std::exception);
     CHECK_THROWS_AS(relation("Eran"), std::exception);
     CHECK_THROWS_AS(relation("Yoav"), std::exception);
+}
+
+
+TEST_CASE("Test case 3") {
+    
+
+    family::Tree j ("Jordan");
+    j.addFather("Jordan", "Samy");
+	j.addMother("Jordan", "Rachel");
+    j.addFather("Samy", "Yosi");
+    j.addMother("Samy", "Esther");
+    j.addFather("Rachel", "Marcel");
+    j.addMother("Rachel", "Melody");
+    j.addFather("Marcel","Avraham");
+    j.addMother("Marcel","Sarah");
+    j.addFather("Melody","Joshua");
+    j.addMother("Melody","Rivka");
+
+    CHECK(j.relation("Samy")=="father");
+    CHECK(j.relation("Rachel")=="mother");
+    CHECK(j.relation("Yosi")=="grandfather");
+    CHECK(j.relation("Esther")=="grandmother");
+    CHECK(j.relation("Marcel")=="grandfather");
+    CHECK(j.relation("Esther")=="grandmother");
+    CHECK(j.relation("Avraham")== "great-grandfather");
+    CHECK(j.relation("Sarah")== "great-grandmother");
+    CHECK(j.relation("Joshua")=="great-grandfather");
+    CHECK(j.relation("Rivkah")=="great-grandmother");
+    CHECK(j.find("father")=="Samy");
+    CHECK(j.find("mother")=="Rachel");
+    CHECK(j.find("grandfather")=="Yosi" || y.find("grandfather")=="Marcel");
+    CHECK(j.find("grandmother")=="Melody" || y.find("grandmother")=="Esther");
+    CHECK(j.find("great-grandfather")=="Joshua" || y.find("great-grandfather")=="Avraham");
+    CHECK(j.find("great-grandmother")=="Sarah" || y.find("great-grandmother")=="Rivka");
+    CHECK_THROWS_AS(relation("Yarin"), std::exception);
+    CHECK_THROWS_AS(find("great-great-grandfather"), std::exception);
+    CHECK_THROWS_AS(find("great-great-grandmother"), std::exception);
+    CHECK_THROWS_AS(find("great-great-great-grandfather"), std::exception);
+    CHECK_THROWS_AS(find("great-great-great-grandmother"), std::exception);
+    j.addMother("Joshua", "greatM");
+    j.addFather("Joshua", "greatF");
+    CHECK(j.relation("greatF")=="great-great-grandfather");
+    CHECK(j.relation("greatM")=="great-great-grandmother");
+    CHECK(j.find("great-great-grandfather")=="greatF");
+    CHECK(j.find("great-great-grandmother")=="greatM");
+    j.addMother("Avraham", "greatM1");
+    j.addFather("Avraham", "greatF1");
+    CHECK(j.relation("greatM1")=="great-great-grandmother");
+    CHECK(j.relation("greatF1")=="great-great-grandfather");
+    j.addMother("Sarah", "greatM2");
+    j.addFather("Sarah", "greatF2");
+    CHECK(j.relation("greatF2")=="great-great-grandfather");
+    CHECK(j.relation("greatM2")=="great-great-grandmother");
+    j.addMother("Rivka", "greatM3");
+    j.addFather("Rivka", "greatF3");
+    CHECK(j.relation("greatF3")=="great-great-grandfather");
+    CHECK(j.relation("greatM3")=="great-great-grandmother");
+    CHECK_THROWS_AS(relation("John"), std::exception);
+    CHECK_THROWS_AS(relation("Pikachu"), std::exception);
+
+}
