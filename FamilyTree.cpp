@@ -4,17 +4,20 @@
 //person
 family::person::person(string name, string type){
 
+    this->name=name;
+    this->type=type;
 }
 
 void family::person::addParent(string name, string type){
-
+    this->name=name;
+    this->type=type;
 }
 
 string family::person::get_type(){
-    return "ans";
+    return this->type;
 }
 family::person::~person(){
-
+    delete person;
 }
 
 
