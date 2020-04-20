@@ -3,21 +3,30 @@
 
 //person
 family::person::person(string name, string type){
-
-    this->name=name;
-    this->type=type;
+    this->_name = name;
+    this->_type = type;
+    this->_father = NULL;
+    this->_mother = NULL;
 }
 
 void family::person::addParent(string name, string type){
-    this->name=name;
-    this->type=type;
+    family::person *parent = new family::person(name, type);
+    if (type == "father"){
+        this->_father = parent;
+    }
+    if (type == "mother"){
+        this->_mother = parent;
+    }
+    else{
+        throw "type not father nor mother";
+    }
 }
 
 string family::person::get_type(){
-    return this->type;
+    return this->_type;
 }
 family::person::~person(){
-    delete person;
+    delete this;
 }
 
 
