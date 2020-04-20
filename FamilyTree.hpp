@@ -4,8 +4,7 @@
 using namespace std;
 
 
-class family{
-    public:
+namespace family {
     class person{
     private:
     string _name;
@@ -20,20 +19,25 @@ class family{
     person* get_father();
     person* get_mother();
     person* search(string name);
+    person* find(string type);
+    void remove();
     ~person();
     };
 
     class Tree{
         private:
-        const person* _head;
+        person* _head;
         public:
         Tree(string name);
-        Tree addFather(string child, string father);
-        Tree addMother(string child, string mother);
+        Tree addFather(string child, string fatherName);
+        Tree addMother(string child, string motherName);
         string relation(string name);
         string find(string name);
         void display();
         void remove(string name);
         ~Tree();
     };
-};
+
+static string typeDefF(string type);
+static string typeDefM(string type);
+}
