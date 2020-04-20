@@ -1,45 +1,27 @@
 #pragma once
 
 #include <iostream>
-#include <string>
 using namespace std;
 
 
-namespace family{
-
-    class Node{
-
-        string name;
-        Node* father;
-        Node* mother;
-        string type;
-    }
-
+class family{
     public:
+    class person{
+    private:
+    string _name;
+    string _type;
+    person* _father;
+    person* _mother;
+    public:
+    person(string name, string type);
+    void addParent(string name, string type);
+    string get_type();
+    ~person();
+    };
 
-    Node(string name,string type){
-        this->name = name;
-        father = NULL;
-        mother = NULL;
-        this->type=type;
-    }
-
-    string getName(){
-        return this->name;
-    }
-
-    Node* getMother(){
-        return this->mother;
-    }
-    Node* getFather(){
-        return this->father;
-    }
-
-}
-class family{ 
     class Tree{
         private:
-        const Node* root;
+        const person* head;
         public:
         Tree(string name);
         Tree addFather(string child, string father);
