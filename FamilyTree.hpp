@@ -16,6 +16,10 @@ class family{
     person(string name, string type);
     void addParent(string name, string type);
     string get_type();
+    string get_name();
+    person* get_father();
+    person* get_mother();
+    person* search(string name);
     ~person();
     };
 
@@ -24,7 +28,6 @@ class family{
         const person* _head;
         public:
         Tree(string name);
-        person* Tree::search(string name);
         Tree addFather(string child, string father);
         Tree addMother(string child, string mother);
         string relation(string name);

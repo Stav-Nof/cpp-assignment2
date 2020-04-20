@@ -25,8 +25,35 @@ void family::person::addParent(string name, string type){
 string family::person::get_type(){
     return this->_type;
 }
+string family::person::get_name(){
+    return this->_name;
+}
+family::person* family::person::get_father(){
+    return this->_father;
+}
+family::person* family::person::get_mother(){
+    return this->_mother;
+}
 family::person::~person(){
     delete this;
+}
+family::person* family::person::search(string name){
+    if (this->_name == name){
+        return this;
+    }
+    else{
+        family::person* ansF = NULL;
+        family::person* ansM = NULL;
+        if (this->_father != NULL) ansF = (this->_father)->search;
+        if (this->_mother != NULL) ansM = (this->get_mother)->search;
+        if (ansF == NULL && ansM != NULL){
+            return ansM; 
+        }
+        if (ansF != NULL && ansM == NULL){
+            return ansF; 
+        }
+    }
+    return NULL;
 }
 
 
@@ -36,9 +63,6 @@ family::Tree::Tree(string name){
     this->_head = person;
 }
 
-family::person* family::Tree::search(string name){
-    
-}
 
 family::Tree family::Tree::addFather(string child, string father){
     return *this;
