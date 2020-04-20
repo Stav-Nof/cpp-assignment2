@@ -32,7 +32,12 @@ family::person::~person(){
 
 //Tree
 family::Tree::Tree(string name){
+    family::person *person = new family::person(name, "me");
+    this->_head = person;
+}
 
+family::person* family::Tree::search(string name){
+    
 }
 
 family::Tree family::Tree::addFather(string child, string father){

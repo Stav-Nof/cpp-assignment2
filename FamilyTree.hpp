@@ -21,9 +21,10 @@ class family{
 
     class Tree{
         private:
-        const person* head;
+        const person* _head;
         public:
         Tree(string name);
+        person* Tree::search(string name);
         Tree addFather(string child, string father);
         Tree addMother(string child, string mother);
         string relation(string name);
