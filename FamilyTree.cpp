@@ -65,6 +65,11 @@ family::Tree::Tree(string name){
 
 
 family::Tree family::Tree::addFather(string child, string father){
+     family::person* toAdd = search(child);
+    family::person* dady = addParent(father,"father");
+    if(toAdd != NULL){
+            toAdd->father = dady;
+    }
     return *this;
 }
 
