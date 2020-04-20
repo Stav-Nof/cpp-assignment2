@@ -13,7 +13,7 @@ namespace family {
     person* _mother;
     public:
     person(string name, string type);
-    void addParent(string name, string type);
+    void addParent(string name, string type, string fOrM);
     string get_type();
     string get_name();
     person* get_father();

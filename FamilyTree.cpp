@@ -9,16 +9,19 @@ family::person::person(string name, string type){
     this->_mother = NULL;
 }
 
-void family::person::addParent(string name, string type){
+void family::person::addParent(string name, string type, string fOrM){
     family::person *parent = new family::person(name, type);
-    if (type == "father"){
+    if (fOrM == "M"){
         this->_father = parent;
+        return;
     }
-    if (type == "mother"){
+    if (fOrM == "F"){
         this->_mother = parent;
+        return;
     }
     else{
-        throw "type not father nor mother";
+        cout << "ani po vlo tov li" << endl;
+        throw exception();
     }
 }
 
@@ -91,22 +94,26 @@ family::Tree::Tree(string name){
 }
 
 family::Tree family::Tree::addFather(string child, string fatherName){
+        cout << fatherName + " as F" << endl;
     family::person* toAdd = (this->_head)->family::person::search(child);          
     if (toAdd == NULL){
         throw "name not found";
     }
     string type = typeDefM(toAdd->get_type());
-    toAdd->family::person::addParent(fatherName, type);
+    toAdd->family::person::addParent(fatherName, type ,"M");
+    cout << fatherName + " added" << endl;
     return *this;
 }
 
 family::Tree family::Tree::addMother(string child, string motherName){
+    cout << motherName + " as M" << endl;
     family::person* toAdd = (this->_head)->family::person::search(child);          
     if (toAdd == NULL){
         throw "name not found";
     }
     string type = typeDefF(toAdd->get_type());
-    toAdd->family::person::addParent(motherName, type);
+    toAdd->family::person::addParent(motherName, type, "F");
+    cout << motherName + " added" << endl;
     return *this;
 }
 

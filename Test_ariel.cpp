@@ -7,12 +7,15 @@ using namespace std;
 
 TEST_CASE("Reference add Tree case") { 
 	family::Tree T ("Yosef");
+	cout << "1" << endl;
 	T.addFather("Yosef", "Yaakov")
 	 .addMother("Yosef", "Rachel")
 	 .addFather("Yaakov", "Isaac")
 	 .addMother("Yaakov", "Rivka")
 	 .addFather("Isaac", "Avraham")
 	 .addFather("Avraham", "Terah");
+	 cout << "3" << endl;
+
 }
 
 TEST_CASE("Yosef Tree case") {  
