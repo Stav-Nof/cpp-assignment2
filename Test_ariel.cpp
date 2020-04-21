@@ -7,7 +7,6 @@ using namespace std;
 
 TEST_CASE("Reference add Tree case") { 
 	family::Tree T ("Yosef");
-	cout << "1" << endl;
 	T.addFather("Yosef", "Yaakov")
 	 .addMother("Yosef", "Rachel")
 	 .addFather("Yaakov", "Isaac")
@@ -38,14 +37,15 @@ TEST_CASE("Yosef Tree case") {
 	T.addMother("Avi", "Sara");
 	CHECK_THROWS(T.addFather("Avraham", "Avraham"));    // duplicate father
 	CHECK_THROWS(T.addMother("Avraham", "Sara"));       // duplicate mother
-	 
 	// Relation test case
 	CHECK(T.relation("Yaakov") == string("father"));
 	CHECK(T.relation("Rachel") == string("mother"));
 	CHECK(T.relation("Isaac") == string("grandfather"));
 	CHECK(T.relation("Rivka") == string("grandmother"));
 	CHECK(T.relation("Avi") == string("grandfather"));
+	cout << "ani po1" << endl;
 	CHECK((T.relation("Ruti") == string("grandmother") || T.relation("Ruti") == string("great-grandmother")));
+	cout << "ani po2" << endl;
 	CHECK(T.relation("Avraham") == string("great-grandfather"));
 	CHECK((T.relation("Ruti") == string("grandmother") || T.relation("Ruti") == string("great-grandmother")));
 	CHECK(T.relation("Israel") == string("great-grandfather"));
@@ -58,7 +58,7 @@ TEST_CASE("Yosef Tree case") {
 	CHECK(T.relation("Ariel") == string("unrelated"));
 	CHECK(T.relation(" ") == string("unrelated"));
 	CHECK(T.relation("  Ariel") == string("unrelated"));
-
+	
 	// Find test case
 	CHECK(T.find("father") == string("Yaakov"));
 	CHECK(T.find("mother") == string("Rachel"));

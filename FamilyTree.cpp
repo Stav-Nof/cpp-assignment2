@@ -20,7 +20,6 @@ void family::person::addParent(string name, string type, string fOrM){
         return;
     }
     else{
-        cout << "ani po vlo tov li" << endl;
         throw exception();
     }
 }
@@ -32,12 +31,10 @@ string family::person::get_name(){
     return this->_name;
 }
 family::person* family::person::get_father(){
-    if (this->_father != NULL) return this->_father;
-    throw "father does not exist";
+    return this->_father;
 }
 family::person* family::person::get_mother(){
-    if (this->_mother != NULL) return this->_mother;
-    throw "mother does not exist";
+    return this->_mother;
 }
 family::person::~person(){
 }
@@ -92,27 +89,21 @@ family::Tree::Tree(string name){
     this->_head = person;
 }
 
-family::Tree& family::Tree::addFather(string child, string fatherName){
-        cout << fatherName + " as F" << endl;
-    family::person* toAdd = (this->_head)->family::person::search(child);          
-    if (toAdd == NULL){
-        throw "name not found";
-    }
+family::Tree& family::Tree::addFather(string childName, string fatherName){
+    family::person* toAdd = (this->_head)->family::person::search(childName);          
+    if (toAdd == NULL) throw "name not found";
+    if (toAdd->get_father() != NULL) throw "Father already exists";
     string type = typeDefM(toAdd->get_type());
     toAdd->family::person::addParent(fatherName, type ,"M");
-    cout << fatherName + " added" << endl;
     return *this;
 }
 
-family::Tree& family::Tree::addMother(string child, string motherName){
-    cout << motherName + " as M" << endl;
-    family::person* toAdd = (this->_head)->family::person::search(child);          
-    if (toAdd == NULL){
-        throw "name not found";
-    }
+family::Tree& family::Tree::addMother(string childName, string motherName){
+    family::person* toAdd = (this->_head)->family::person::search(childName);          
+    if (toAdd == NULL) throw "name not found";
+    if (toAdd->get_mother() != NULL) throw "Mother already exists";
     string type = typeDefF(toAdd->get_type());
     toAdd->family::person::addParent(motherName, type, "F");
-    cout << motherName + " added" << endl;
     return *this;
 }
 
@@ -130,8 +121,10 @@ void family::Tree::display(){
 
 }
 void family::Tree::remove(string name){
+    if (name == this->_head->get_name()) throw name + "is root";
     family::person* toRemove = (this->_head)->family::person::search(name); 
     if (toRemove == NULL) throw "name not found";
+
     toRemove->remove();
 }
 
@@ -142,12 +135,14 @@ family::Tree::~Tree(){
 //static
 static string family::typeDefM(string type){
     if (type == "me") return "father";
-    if (type == "father") return "grandfather";
+    if (type == "father" || type == "mother") return "grandfather";
+    type.replace(type.length()-6, 2 ,"fa");
     return "great-" + type;
 }
 
 static string family::typeDefF(string type){
     if (type == "me") return "mother";
-    if (type == "mother") return "grandmother";
+    if (type == "mother" || type == "father") return "grandmother";
+    type.replace(type.length()-6, 2 ,"mo");
     return "great-" + type;
 }

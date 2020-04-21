@@ -29,8 +29,8 @@ namespace family {
         person* _head;
         public:
         Tree(string name);
-        Tree& addFather(string child, string fatherName);
-        Tree& addMother(string child, string motherName);
+        Tree& addFather(string childName, string fatherName);
+        Tree& addMother(string childName, string motherName);
         string relation(string name);
         string find(string name);
         void display();
