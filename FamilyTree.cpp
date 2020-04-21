@@ -92,7 +92,7 @@ family::Tree::Tree(string name){
     this->_head = person;
 }
 
-family::Tree family::Tree::addFather(string child, string fatherName){
+family::Tree& family::Tree::addFather(string child, string fatherName){
         cout << fatherName + " as F" << endl;
     family::person* toAdd = (this->_head)->family::person::search(child);          
     if (toAdd == NULL){
@@ -104,7 +104,7 @@ family::Tree family::Tree::addFather(string child, string fatherName){
     return *this;
 }
 
-family::Tree family::Tree::addMother(string child, string motherName){
+family::Tree& family::Tree::addMother(string child, string motherName){
     cout << motherName + " as M" << endl;
     family::person* toAdd = (this->_head)->family::person::search(child);          
     if (toAdd == NULL){
