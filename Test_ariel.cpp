@@ -14,7 +14,6 @@ TEST_CASE("Reference add Tree case") {
 	 .addMother("Yaakov", "Rivka")
 	 .addFather("Isaac", "Avraham")
 	 .addFather("Avraham", "Terah");
-	 cout << "3" << endl;
 
 }
 

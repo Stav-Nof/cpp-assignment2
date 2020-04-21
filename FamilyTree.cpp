@@ -40,7 +40,6 @@ family::person* family::person::get_mother(){
     throw "mother does not exist";
 }
 family::person::~person(){
-    delete this;
 }
 family::person* family::person::search(string name){
     if (this->_name == name){
@@ -138,7 +137,6 @@ void family::Tree::remove(string name){
 
 family::Tree::~Tree(){
     this->_head->remove();
-    delete this;
 }
 
 //static
