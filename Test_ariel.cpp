@@ -86,11 +86,8 @@ TEST_CASE("Yosef Tree case") {
 	CHECK_THROWS(T.addFather("Avi", "Israel"));  // add to a removed person
 	T.addFather("Rachel", "Shmual");
 	T.remove("Isaac");
-		cout << "ani po" << endl;
 	T.remove("Rivka");
-		cout << "ani po" << endl;
 	T.remove("Ruti");
-	cout << "ani po" << endl;
 	CHECK_THROWS(T.find("grandmother"));
 	CHECK_THROWS(T.addFather("Isaac", "Avraham"));
 	CHECK_THROWS(T.addMother("Isaac", "Ruti"));
