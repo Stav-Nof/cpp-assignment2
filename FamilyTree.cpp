@@ -62,8 +62,11 @@ family::person* family::person::search(string name){
 }
 
 family::person* family::person::searchSon(string name){
-    if (this->_father->_name == name || this->_mother->_name == name){
-        return this;
+    if (this->_father != NULL){
+        if (this->_father->_name == name)return this;
+    }
+    if (this->_mother != NULL){
+        if (this->_mother->_name == name)return this;
     }
     family::person* ansF = NULL;
     family::person* ansM = NULL;
@@ -148,8 +151,12 @@ void family::Tree::remove(string name){
     if (toRemove == NULL) throw "name not found";
     family::person* son = (this->_head)->family::person::searchSon(name);
     if (toRemove == NULL) throw "son not found";
-    if (son->get_father()->get_name() == name) son->set_father(NULL);
-    if (son->get_mother()->get_name() == name) son->set_mother(NULL);
+    if (son->get_father() != NULL){
+        if (son->get_father()->get_name() == name) son->set_father(NULL);
+    }
+    if (son->get_mother() != NULL){
+        if (son->get_mother()->get_name() == name) son->set_mother(NULL);
+    }
     toRemove->remove();
 }
 
