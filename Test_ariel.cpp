@@ -43,22 +43,18 @@ TEST_CASE("Yosef Tree case") {
 	CHECK(T.relation("Isaac") == string("grandfather"));
 	CHECK(T.relation("Rivka") == string("grandmother"));
 	CHECK(T.relation("Avi") == string("grandfather"));
-	cout << "ani po1" << endl;
 	CHECK((T.relation("Ruti") == string("grandmother") || T.relation("Ruti") == string("great-grandmother")));
-	cout << "ani po2" << endl;
 	CHECK(T.relation("Avraham") == string("great-grandfather"));
 	CHECK((T.relation("Ruti") == string("grandmother") || T.relation("Ruti") == string("great-grandmother")));
 	CHECK(T.relation("Israel") == string("great-grandfather"));
 	CHECK(T.relation("Sara") == string("great-grandmother"));
 	CHECK(T.relation("Yosi") == string("great-great-grandfather"));
     CHECK(T.relation("Shelly") == string("great-great-grandmother"));
-
     CHECK(T.relation("xyz") == string("unrelated"));
 	CHECK(T.relation("Omer") == string("unrelated"));
 	CHECK(T.relation("Ariel") == string("unrelated"));
 	CHECK(T.relation(" ") == string("unrelated"));
 	CHECK(T.relation("  Ariel") == string("unrelated"));
-	
 	// Find test case
 	CHECK(T.find("father") == string("Yaakov"));
 	CHECK(T.find("mother") == string("Rachel"));
@@ -77,14 +73,15 @@ TEST_CASE("Yosef Tree case") {
 	CHECK_THROWS(T.find("great,great,grandmother"));
 	CHECK_THROWS(T.find("great?grandmother"));
 	CHECK_THROWS(T.find("great grandmother"));
-
 	// Remove test case
 	//CHECK_THROWS(T.remove("Yosef"));  // removing the root is an error
 	CHECK_THROWS(T.remove(" "));      // removing a non-existent person
+
 	CHECK_THROWS(T.remove("xyz"));
+	
 	CHECK_THROWS(T.remove("Ariel"));
 	CHECK_THROWS(T.remove("  Rivka"));
-
+	
 	T.remove("Yosi");  // remove the great-great-grandfather
 	CHECK_THROWS(T.find("great-great-grandfather"));  // A removed relation does not exist
 	T.addFather("Avraham", "Ido");  // Add a new father after removal

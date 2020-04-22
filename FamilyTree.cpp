@@ -20,7 +20,7 @@ void family::person::addParent(string name, string type, string fOrM){
         return;
     }
     else{
-        throw exception();
+        throw "Type not defined";
     }
 }
 
@@ -36,42 +36,61 @@ family::person* family::person::get_father(){
 family::person* family::person::get_mother(){
     return this->_mother;
 }
+void family::person::set_father(family::person* p){
+    this->_father = p;
+}
+void family::person::set_mother(family::person* p){
+this->_mother = p;
+}
 family::person::~person(){
 }
 family::person* family::person::search(string name){
     if (this->_name == name){
         return this;
     }
-    else{
-        family::person* ansF = NULL;
-        family::person* ansM = NULL;
-        if (this->_father != NULL) ansF = (this->get_father())->search(name);
-        if (this->_mother != NULL) ansM = (this->get_mother())->search(name);
-        if (ansF == NULL && ansM != NULL){
-            return ansM; 
-        }
-        if (ansF != NULL && ansM == NULL){
-            return ansF; 
-        }
+    family::person* ansF = NULL;
+    family::person* ansM = NULL;
+    if (this->_father != NULL) ansF = (this->get_father())->search(name);
+    if (this->_mother != NULL) ansM = (this->get_mother())->search(name);
+    if (ansM != NULL){
+        return ansM; 
+    }
+    if (ansF != NULL){
+        return ansF; 
+    }
+    return NULL;
+}
+
+family::person* family::person::searchSon(string name){
+    if (this->_father->_name == name || this->_mother->_name == name){
+        return this;
+    }
+    family::person* ansF = NULL;
+    family::person* ansM = NULL;
+    if (this->_father != NULL) ansF = (this->get_father())->searchSon(name);
+    if (this->_mother != NULL) ansM = (this->get_mother())->searchSon(name);
+    if (ansM != NULL){
+        return ansM; 
+    }
+    if (ansF != NULL){
+        return ansF; 
     }
     return NULL;
 }
 
 family::person* family::person::find(string type){
-        if (this->_type == type){
+    if (this->_type == type){
         return this;
     }
-    else{
-        family::person* ansF = NULL;
-        family::person* ansM = NULL;
-        if (this->_father != NULL) ansF = (this->_father)->find(type);
-        if (this->_mother != NULL) ansM = (this->_mother)->find(type);
-        if (ansF == NULL && ansM != NULL){
-            return ansM; 
-        }
-        if (ansF != NULL && ansM == NULL){
-            return ansF; 
-        }
+    family::person* ansF = NULL;
+    family::person* ansM = NULL;
+    if (this->_father != NULL) ansF = (this->_father)->find(type);
+    if (this->_mother != NULL) ansM = (this->_mother)->find(type);
+    if (ansM != NULL){
+        return ansM; 
+    }
+    if (ansF != NULL){
+        return ansF; 
     }
     return NULL;
 }
@@ -108,23 +127,29 @@ family::Tree& family::Tree::addMother(string childName, string motherName){
 }
 
 string family::Tree::relation(string name){
-    family::person* toReturn = (this->_head)->family::person::search(name);  
+    family::person* toReturn = (this->_head)->family::person::search(name);
+    if (toReturn == NULL) return "unrelated";
     return toReturn->get_type();
 }
 
 string family::Tree::find(string type){
     family::person* toReturn = (this->_head)->family::person::find(type);
+    if (toReturn == NULL) throw "find failed";
     return toReturn->get_name();
 }
 
 void family::Tree::display(){
 
 }
+
 void family::Tree::remove(string name){
     if (name == this->_head->get_name()) throw name + "is root";
     family::person* toRemove = (this->_head)->family::person::search(name); 
     if (toRemove == NULL) throw "name not found";
-
+    family::person* son = (this->_head)->family::person::searchSon(name);
+    if (toRemove == NULL) throw "son not found";
+    if (son->get_father()->get_name() == name) son->set_father(NULL);
+    if (son->get_mother()->get_name() == name) son->set_mother(NULL);
     toRemove->remove();
 }
 

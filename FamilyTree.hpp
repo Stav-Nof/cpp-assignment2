@@ -18,7 +18,10 @@ namespace family {
     string get_name();
     person* get_father();
     person* get_mother();
+    void set_father(person* p);
+    void set_mother(person* p);
     person* search(string name);
+    person* searchSon(string name);
     person* find(string type);
     void remove();
     ~person();
